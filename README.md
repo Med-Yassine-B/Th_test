@@ -24,9 +24,9 @@ int squared(int x){
 #include "file_to_test.cpp"
 
 void test_squared(){
-    TH_TEST::assert(squared(2)==4)//passing test
-    TH_TEST::assert(squared(2)==6)//failing test
-    TH_TEST::assert(squared(2)==4)//failing test
+    ASSERT(squared(2)==4)//passing test
+    ASSERT(squared(2)==6)//failing test
+    ASSERT(squared(2)==4)//failing test
 
 }
 TEST(test_squared)
