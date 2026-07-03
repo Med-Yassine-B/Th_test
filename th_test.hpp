@@ -45,15 +45,21 @@ namespace TH_TEST {
             test.func();
         }
         bool all_passed=true;
+        int passed_count=0;
+        int total=tests.size();
         std::cout<<"Tests Report:"<<std::endl;
+        int  i=0;
         for(auto& test:tests){
+            i++;
             if(test.passed){
-                std::cout<<"\t"<<test.name<<"() [Passed]"<<std::endl;
+                std::cout<<"["<<i<<"/"<<total<<"] "<<test.name<<"() [Passed] "<<std::endl;
+                passed_count++;
             }else{
-                std::cout<<"\t"<<test.name<<"() [Failed]"<<std::endl;
+                std::cout<<"["<<i<<"/"<<total<<"] "<<test.name<<"() [Failed] "<<std::endl;
                 all_passed=false;
             }
         }
+        std::cout<<"Tests Passed ["<<passed_count<<"/"<<total<<"]"<<std::endl;
         if(all_passed){
             std::cout<<"[All Tests Passed]"<<std::endl;
         }
