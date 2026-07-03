@@ -14,6 +14,13 @@
     };\
     struct func_name##registrer func_name##registrer_instance; 
 
+#define ASSERT(condition)\
+{\
+    if(!(condition)){\
+        std::cerr<<"[" #condition " Failed at: " __FILE__ ":" <<__LINE__ <<"]"<<std::endl;\
+        TH_TEST::current_test->passed=false;\
+    }\
+}
 
 
 
@@ -30,12 +37,6 @@ namespace TH_TEST {
 
     inline struct test_function* current_test=nullptr;
 
-    inline void assert(bool condition){
-        if(!condition){
-            std::cerr<<"["<<current_test->name<<" Failed at "<<current_test->line<<" : "<<current_test->file<<"]"<<std::endl;
-            current_test->passed=false;
-        }
-    }
 
     inline void RUN_TESTS(){
         std::cout<<"RUNNING Tests..."<<std::endl;
