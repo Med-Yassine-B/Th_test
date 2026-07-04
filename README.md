@@ -26,7 +26,7 @@ int squared(int x){
 void test_squared(){
     ASSERT(squared(2)==4)//passing test
     ASSERT(squared(2)==6)//failing test
-    ASSERT(squared(2)==4)//failing test
+    ASSERT(squared(2)==9)//failing test
 
 }
 TEST(test_squared)
