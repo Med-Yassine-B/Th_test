@@ -4,7 +4,6 @@
 #include <vector>
 #include <iostream>
 
-
 #define TEST(func_name)\
     void func_name();\
     struct func_name##registrer{\
@@ -22,8 +21,6 @@
     }\
 }
 
-
-
 namespace TH_TEST {
 
     struct test_function{
@@ -37,38 +34,34 @@ namespace TH_TEST {
 
     inline struct test_function* current_test=nullptr;
 
-
     inline void RUN_TESTS(){
-        std::cout<<"RUNNING Tests..."<<std::endl;
+        std::cout << "RUNNING Tests...\n" << std::endl;
+        
         for(auto& test:tests){
             current_test=&test;
             test.func();
         }
-        bool all_passed=true;
-        int passed_count=0;
-        int total=tests.size();
-        std::cout<<"Tests Report:"<<std::endl;
-        int  i=0;
-        for(auto& test:tests){
-            i++;
-            if(test.passed){
-                std::cout<<"["<<i<<"/"<<total<<"] "<<test.name<<"() [Passed] "<<std::endl;
+        std::cout << std::endl;
+
+        std::cout << "--------------------------Tests Report---------------------------------" << std::endl;
+        
+        int passed_count = 0;
+        int total_tests = tests.size();
+        
+        for(size_t i = 0; i < tests.size(); ++i){
+            std::cout << "\t[" << (i + 1) << "/" << total_tests << "] " << tests[i].name << "() ";
+            if(tests[i].passed){
+                std::cout << "[Passed]" << std::endl;
                 passed_count++;
             }else{
-                std::cout<<"["<<i<<"/"<<total<<"] "<<test.name<<"() [Failed] "<<std::endl;
-                all_passed=false;
+                std::cout << "[Failed]" << std::endl;
             }
         }
-        std::cout<<"Tests Passed ["<<passed_count<<"/"<<total<<"]"<<std::endl;
-        if(all_passed){
-            std::cout<<"[All Tests Passed]"<<std::endl;
-        }
+        std::cout << std::endl;
+
+        std::cout << "Passing Tests [" << passed_count << "/" << total_tests << "]" << std::endl;
     }
 
 }
-
-
-
-
 
 #endif
