@@ -16,7 +16,7 @@
 #define ASSERT(condition)\
 {\
     if(!(condition)){\
-        std::cerr<<"[" #condition " Failed at: " __FILE__ ":" <<__LINE__ <<"]"<<std::endl;\
+        std::cerr << "[\033[34m" #condition "\033[0m Failed at: \033[33m" __FILE__ ":" << __LINE__ << "\033[0m]" << std::endl;\
         TH_TEST::current_test->passed=false;\
     }\
 }
@@ -35,7 +35,7 @@ namespace TH_TEST {
     inline struct test_function* current_test=nullptr;
 
     inline void RUN_TESTS(){
-        std::cout << "RUNNING Tests...\n" << std::endl;
+        std::cout << "\033[33mRUNNING Tests...\033[0m\n" << std::endl;
         
         for(auto& test:tests){
             current_test=&test;
@@ -43,7 +43,7 @@ namespace TH_TEST {
         }
         std::cout << std::endl;
 
-        std::cout << "--------------------------Tests Report---------------------------------" << std::endl;
+        std::cout << "\033[36m--------------------------Tests Report---------------------------------\033[0m" << std::endl;
         
         int passed_count = 0;
         int total_tests = tests.size();
@@ -51,15 +51,19 @@ namespace TH_TEST {
         for(size_t i = 0; i < tests.size(); ++i){
             std::cout << "\t[" << (i + 1) << "/" << total_tests << "] " << tests[i].name << "() ";
             if(tests[i].passed){
-                std::cout << "[Passed]" << std::endl;
+                std::cout << "\033[32m[Passed]\033[0m" << std::endl;
                 passed_count++;
             }else{
-                std::cout << "[Failed]" << std::endl;
+                std::cout << "\033[31m[Failed]\033[0m" << std::endl;
             }
         }
         std::cout << std::endl;
 
-        std::cout << "Passing Tests [" << passed_count << "/" << total_tests << "]" << std::endl;
+        if(passed_count == total_tests){
+            std::cout << "\033[32mPassing Tests [" << passed_count << "/" << total_tests << "]\033[0m" << std::endl;
+        }else{
+            std::cout << "\033[31mPassing Tests [" << passed_count << "/" << total_tests << "]\033[0m" << std::endl;
+        }
     }
 
 }
